@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
 import Notification from './Notification';
+import Section from './Section';
 
 class Feedback extends Component {
   static defaultProps = {
@@ -51,18 +52,23 @@ class Feedback extends Component {
     const positiveFeedback = this.countPositiveFeedbackPercentage();
     return (
       <div>
-        <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
-        {total > 0 ? (
-          <Statistics
-            bad={bad}
-            good={good}
-            neutral={neutral}
-            total={total}
-            positiveFeedback={positiveFeedback}
-          />
-        ) : (
-          <Notification message="No feedback was given" />
-        )}
+        <Section title="Please Leave Feedback">
+          <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
+        </Section>
+
+        <Section title="Statistics">
+          {total > 0 ? (
+            <Statistics
+              bad={bad}
+              good={good}
+              neutral={neutral}
+              total={total}
+              positiveFeedback={positiveFeedback}
+            />
+          ) : (
+            <Notification message="No feedback was given" />
+          )}
+        </Section>
       </div>
     );
   }
